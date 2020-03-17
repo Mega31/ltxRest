@@ -1,22 +1,20 @@
 package ltxrest.ltx.model;
 
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "user_details",schema = "userdata")
 
 public class MyUser implements UserDetails {
 
@@ -29,11 +27,15 @@ public class MyUser implements UserDetails {
     @Column(name = "email")
     private String username;
     private String password;
+    @Transient
+    private String confirmPassword;
     private String gender;
-
+    @ManyToOne
+    @JoinColumn(name = "role_user", referencedColumnName = "id")
+    private Role role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority(""));
+        return Arrays.asList(new SimpleGrantedAuthority(role.getRole()));
     }
 
     @Override
