@@ -18,7 +18,7 @@ public class SecurityService extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserSeriveDetails userSeriveDetails;
     @Autowired
-    PassworddEncode encode;
+    private PassworddEncode encode;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -26,7 +26,7 @@ public class SecurityService extends WebSecurityConfigurerAdapter {
                 csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers()
+                .antMatchers("/Rest/sign-up")
                 .permitAll()
                 .anyRequest()
                 .hasAnyAuthority("ROLE_USER","ROLE_ADMIN")

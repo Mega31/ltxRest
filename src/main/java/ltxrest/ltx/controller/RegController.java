@@ -14,10 +14,11 @@ public class RegController {
     @Autowired
     private UserService userService;
     @PostMapping
-    public boolean signUp(@RequestBody MyUser user){
+    public String signUp(@RequestBody MyUser user){
         if (userService.passwordChecker(user)){
             userService.save(user);
+            return "done";
         }
-        return false;
+        return "something went wrong";
     }
 }
