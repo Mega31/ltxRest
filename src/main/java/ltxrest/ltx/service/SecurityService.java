@@ -16,9 +16,9 @@ public class SecurityService extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
     @Autowired
-    private UserSeriveDetails userSeriveDetails;
+    private UserDetailsServiceImpl userDetailsService;
     @Autowired
-    private PassworddEncode encode;
+    private PasswordEncoder encode;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,7 +36,7 @@ public class SecurityService extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userSeriveDetails).passwordEncoder(encode.passworddEncode());
+        auth.userDetailsService(userDetailsService).passwordEncoder(encode.passwordEncoderProvider());
     }
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {

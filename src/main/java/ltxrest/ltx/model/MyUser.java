@@ -1,5 +1,6 @@
 package ltxrest.ltx.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,8 +28,6 @@ public class MyUser implements UserDetails {
     @Column(name = "email")
     private String username;
     private String password;
-    @Transient
-    private String confirmPassword;
     private String gender;
     @ManyToOne
     @JoinColumn(name = "role_user", referencedColumnName = "id")
