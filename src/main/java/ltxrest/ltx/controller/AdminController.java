@@ -1,6 +1,10 @@
 package ltxrest.ltx.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
+import ltxrest.ltx.dto.UserDto;
+import ltxrest.ltx.mapper.UserDtoMapper;
 import ltxrest.ltx.model.MyUser;
 import ltxrest.ltx.repo.RoleRepo;
 import ltxrest.ltx.repo.UserRepo;
@@ -23,8 +27,13 @@ public class AdminController {
     private UserRepo userRepo;
     @Autowired
     private RoleRepo role;
+    @Autowired
+    private UserDtoMapper userDtoMapper;
     @GetMapping(path = "/{username}")
-    public UserDetails fetchUser(@PathVariable("username") String username) throws UsernameNotFoundException {
-        return  userDetailsService.loadUserByUsername(username);
+    public UserDto fetchUser(@PathVariable("username") String username) throws UsernameNotFoundException {
+
+        UserDto userDto = userDetailsService.loadByEmail(username);
+
+        return userDto;
     }
 }

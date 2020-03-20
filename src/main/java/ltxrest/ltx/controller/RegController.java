@@ -1,6 +1,8 @@
 package ltxrest.ltx.controller;
 
 import lombok.AllArgsConstructor;
+import ltxrest.ltx.dto.UserDto;
+import ltxrest.ltx.mapper.UserDtoMapper;
 import ltxrest.ltx.model.MyUser;
 import ltxrest.ltx.repo.UserRepo;
 import ltxrest.ltx.service.UserDetailsServiceImpl;
@@ -19,13 +21,15 @@ public class RegController {
     private UserService userService;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private  UserDtoMapper userDtoMapper;
     @PostMapping
-    public String signUp(@RequestBody MyUser user){
-        if ((userRepo.findByUsername(user.getUsername())!= null)){
+    public String signUp(@RequestBody UserDto userDto){
+        if ((userRepo.findByUsername(userDto.getEmail())!= null)){
             return "user alredy exists";
         }
-        if (userService.passwordChecker(user)){
-            userService.save(user);
+        if (userService.passwordChecker(userDto.getPassword(),userDto.getConfirmPassword())){
+            userService.save(userDtoMapper.toUser(userDto));
             return "you can go back and login";
         }
 

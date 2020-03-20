@@ -14,6 +14,6 @@ public class Role {
     private int id;
     private String role;
     @OneToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "role_user",referencedColumnName = "id"))
+     @JoinTable(joinColumns = @JoinColumn(name = "role_user",referencedColumnName = "id"))
     private List<MyUser> user;
 }
