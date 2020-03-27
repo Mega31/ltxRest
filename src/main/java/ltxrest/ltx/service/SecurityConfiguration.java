@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import javax.sql.DataSource;
 
 @EnableWebSecurity
-public class SecurityService extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
     @Autowired
@@ -27,10 +27,10 @@ public class SecurityService extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/Rest/sign-up")
-                .permitAll()
-                .anyRequest()
-                .hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
-                .and().httpBasic();
+                .permitAll().antMatchers("/api/user/admin/panel")
+                .hasAuthority("ROLE_ADMIN")
+                .antMatchers("/api/user/admin/panel/{username}").hasAuthority("ROLE_ADMIN").and().httpBasic();
+
 
     }
 

@@ -1,6 +1,7 @@
 package ltxrest.ltx.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public class Role {
     @Id
     private int id;
+    @ToString.Exclude
     private String role;
     @OneToMany
      @JoinTable(joinColumns = @JoinColumn(name = "role_user",referencedColumnName = "id"))

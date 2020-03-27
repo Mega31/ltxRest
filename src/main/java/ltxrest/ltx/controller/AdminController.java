@@ -1,39 +1,37 @@
 package ltxrest.ltx.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
 import ltxrest.ltx.dto.UserDto;
-import ltxrest.ltx.mapper.UserDtoMapper;
-import ltxrest.ltx.model.MyUser;
-import ltxrest.ltx.repo.RoleRepo;
-import ltxrest.ltx.repo.UserRepo;
-import ltxrest.ltx.service.UserDetailsServiceImpl;
+import ltxrest.ltx.service.AdminService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
-@AllArgsConstructor
+
+
+
 @RestController
 @RequestMapping("/api/user/admin/panel")
+
 public class AdminController {
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-    @Autowired
-    private UserRepo userRepo;
-    @Autowired
-    private RoleRepo role;
-    @Autowired
-    private UserDtoMapper userDtoMapper;
-    @GetMapping(path = "/{username}")
-    public UserDto fetchUser(@PathVariable("username") String username) throws UsernameNotFoundException {
+    private final Logger logger = LoggerFactory.getLogger(AdminService.class);
 
-        UserDto userDto = userDetailsService.loadByEmail(username);
-
-        return userDto;
+    @Autowired
+    private AdminService adminService;
+    @GetMapping(path = "/{email}")
+    public UserDto fetchUser(@PathVariable("email") String email, Authentication auth) throws UsernameNotFoundException {
+        logger.info("Getting user with email:"+email+" for admin:"+auth.getName());
+        return adminService.getUser(email);
     }
+    @PutMapping(path = "/{email}/{role}")
+    public String updateUserRole(@PathVariable("email")String email,@PathVariable("role") String role
+            ,Authentication auth){
+        logger.info("Updating user:"+email+" to role:"+role+" by ADMIN:"+auth.getName());
+        adminService.updateUserRole(email,role);
+        return "Successful";
+    }
+
 }

@@ -1,6 +1,6 @@
 package ltxrest.ltx.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +22,6 @@ public class MyUser implements UserDetails {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String first_name;
     private String last_name;
     @Column(name = "email")
