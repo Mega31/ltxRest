@@ -1,6 +1,5 @@
 package ltxrest.ltx.controller;
 
-import ltxrest.ltx.bean.RoleBean;
 import ltxrest.ltx.dto.UserDto;
 import ltxrest.ltx.service.AdminService;
 import org.slf4j.Logger;
