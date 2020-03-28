@@ -29,7 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/Rest/sign-up")
                 .permitAll().antMatchers("/api/user/admin/panel")
                 .hasAuthority("ROLE_ADMIN")
-                .antMatchers("/api/user/admin/panel/{username}").hasAuthority("ROLE_ADMIN").and().httpBasic();
+                .antMatchers("/api/user/admin/panel/{username}").hasAuthority("ROLE_ADMIN")
+                .anyRequest().authenticated().and().httpBasic();
 
 
     }

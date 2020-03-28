@@ -3,6 +3,7 @@ package ltxrest.ltx.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,9 +15,8 @@ import java.util.Collection;
 
 @Entity
 @Data
-@NoArgsConstructor
+@ToString(onlyExplicitlyIncluded = true)
 @Table(name = "user_details",schema = "userdata")
-
 public class MyUser implements UserDetails {
 
     @Id()
@@ -24,12 +24,13 @@ public class MyUser implements UserDetails {
     private long id;
     private String first_name;
     private String last_name;
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     private String username;
     private String password;
     private String gender;
     @ManyToOne
     @JoinColumn(name = "role_user", referencedColumnName = "id")
+
     private Role role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,5 +1,6 @@
 package ltxrest.ltx.controller;
 
+import ltxrest.ltx.bean.RoleBean;
 import ltxrest.ltx.dto.UserDto;
 import ltxrest.ltx.service.AdminService;
 import org.slf4j.Logger;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user/admin/panel")
-
 public class AdminController {
     private final Logger logger = LoggerFactory.getLogger(AdminService.class);
 
@@ -27,8 +27,8 @@ public class AdminController {
         return adminService.getUser(email);
     }
     @PutMapping(path = "/{email}/{role}")
-    public String updateUserRole(@PathVariable("email")String email,@PathVariable("role") String role
-            ,Authentication auth){
+    public String updateUserRole(@PathVariable("email")String email, @PathVariable String role
+            , Authentication auth){
         logger.info("Updating user:"+email+" to role:"+role+" by ADMIN:"+auth.getName());
         adminService.updateUserRole(email,role);
         return "Successful";
