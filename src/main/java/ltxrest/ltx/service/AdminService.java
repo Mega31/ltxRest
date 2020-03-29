@@ -1,7 +1,7 @@
 package ltxrest.ltx.service;
 
-import ltxrest.ltx.dto.RoleDto;
-import ltxrest.ltx.dto.UserDto;
+import ltxrest.ltx.core.UserDetailsServiceImpl;
+import ltxrest.ltx.dto.RegDto;
 import ltxrest.ltx.mapper.UserDtoMapper;
 import ltxrest.ltx.model.MyUser;
 import ltxrest.ltx.repo.RoleRepo;
@@ -22,10 +22,10 @@ public class AdminService {
     private RoleRepo roleRepo;
     @Autowired
     private UserDtoMapper userDtoMapper;
-    public UserDto getUser(String email){
+    public RegDto getUser(String email){
         logger.info("Loading UserByEmail");
-        UserDto userDto = userDetailsService.loadByEmail(email);
-        return userDto;
+        RegDto regDto = userDetailsService.loadByEmail(email);
+        return regDto;
     }
     public void updateUserRole(String email,String role){
     logger.info("Updating UserRole");

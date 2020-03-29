@@ -1,13 +1,12 @@
 package ltxrest.ltx.controller;
 
-import ltxrest.ltx.dto.UserDto;
+import ltxrest.ltx.dto.RegDto;
 import ltxrest.ltx.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,7 +20,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
     @GetMapping(path = "/{email}")
-    public UserDto fetchUser(@PathVariable("email") String email, Authentication auth) throws UsernameNotFoundException {
+    public RegDto fetchUser(@PathVariable("email") String email, Authentication auth) throws UsernameNotFoundException {
         logger.info("Getting user with email:"+email+" for admin:"+auth.getName());
         return adminService.getUser(email);
     }

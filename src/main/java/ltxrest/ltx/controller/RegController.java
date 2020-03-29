@@ -1,12 +1,9 @@
 package ltxrest.ltx.controller;
 
-import lombok.AllArgsConstructor;
-import ltxrest.ltx.dto.UserDto;
+import ltxrest.ltx.dto.RegDto;
 import ltxrest.ltx.mapper.UserDtoMapper;
-import ltxrest.ltx.model.MyUser;
 import ltxrest.ltx.repo.UserRepo;
-import ltxrest.ltx.service.UserDetailsServiceImpl;
-import ltxrest.ltx.service.UserService;
+import ltxrest.ltx.core.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +24,14 @@ public class RegController {
     @Autowired
     private  UserDtoMapper userDtoMapper;
     @PostMapping
-    public String signUp(@RequestBody UserDto userDto){
-        if ((userRepo.findByUsername(userDto.getEmail())!= null)){
-            logger.debug("User alredy exists.user email:"+userDto.getEmail());
+    public String signUp(@RequestBody RegDto regDto){
+        if ((userRepo.findByUsername(regDto.getEmail())!= null)){
+            logger.debug("User alredy exists.user email:"+ regDto.getEmail());
             return "user alredy exists";
         }
-        if (userService.passwordChecker(userDto.getPassword(),userDto.getConfirmPassword())){
-            userService.save(userDtoMapper.toUser(userDto));
-            logger.debug("creating user:"+userDto.getEmail());
+        if (userService.passwordChecker(regDto.getPassword(), regDto.getConfirmPassword())){
+            userService.save(userDtoMapper.toRegDto(regDto));
+            logger.debug("creating user:"+ regDto.getEmail());
             return "you can go back and login";
         }
         logger.debug("password did not match");

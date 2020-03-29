@@ -1,7 +1,6 @@
-package ltxrest.ltx.service;
+package ltxrest.ltx.core;
 
-import lombok.AllArgsConstructor;
-import ltxrest.ltx.dto.UserDto;
+import ltxrest.ltx.dto.RegDto;
 import ltxrest.ltx.mapper.UserDtoMapper;
 import ltxrest.ltx.model.MyUser;
 import ltxrest.ltx.repo.UserRepo;
@@ -26,12 +25,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         throw new UsernameNotFoundException("User '" + email + "' not found");
     }
-    @Transactional
-    public UserDto loadByEmail(String email) throws UsernameNotFoundException{
-        UserDto userDto = userDtoMapper.toUserDto(userRepo.findByUsername(email));
+    public RegDto loadByEmail(String email) throws UsernameNotFoundException{
+        RegDto regDto = userDtoMapper.toRegDto(userRepo.findByUsername(email));
 
-        if (userDto!=null){
-            return userDto;
+        if (regDto !=null){
+            return regDto;
         }
         throw new UsernameNotFoundException("User '" + email + "' not found");
     }

@@ -1,21 +1,25 @@
 package ltxrest.ltx.controller;
 
-import ltxrest.ltx.dto.UserDto;
-import ltxrest.ltx.service.UserDetailsServiceImpl;
+import ltxrest.ltx.dto.RegDto;
+import ltxrest.ltx.service.UserControllerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-
+    private UserControllerService userControllerService;
     @GetMapping(path="/profile")
-    public UserDto loadUserProfile(Authentication auth){
-    return userDetailsService.loadByEmail(auth.getName());
+    public RegDto fetchProfile(Authentication auth){
+        return userControllerService.loadUserProfile(auth.getName());
     }
+    @PutMapping(path = "/uploadProfile")
+    public String uploadProfilePic(@RequestParam("file")MultipartFile file){
+
+        return "uploading failed";
+    };
 }

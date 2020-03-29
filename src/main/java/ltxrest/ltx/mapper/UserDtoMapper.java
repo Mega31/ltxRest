@@ -1,7 +1,7 @@
 package ltxrest.ltx.mapper;
 
 import ltxrest.ltx.dto.RoleDto;
-import ltxrest.ltx.dto.UserDto;
+import ltxrest.ltx.dto.RegDto;
 import ltxrest.ltx.model.MyUser;
 import ltxrest.ltx.model.Role;
 import org.mapstruct.Mapper;
@@ -16,11 +16,11 @@ public interface UserDtoMapper {
     @Mapping(target = "role",ignore = true)
     @Mapping(target = "authorities",ignore = true)
     @Mapping(target = "username",source = "email")
-    MyUser toUser(UserDto userDto);
+    MyUser toRegDto(RegDto regDto);
     @Mapping(target = "email",source = "username")
     @Mapping(target = "confirmPassword",ignore = true)
     @Mapping(target = "roleIds" ,source = "role")
-    UserDto toUserDto(MyUser myUser);
+    RegDto toRegDto(MyUser myUser);
     RoleDto toDomain(Role role);
 
 }

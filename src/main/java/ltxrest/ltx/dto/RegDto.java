@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class UserDto {
+public class RegDto {
     private String first_name;
     private String last_name;
+    private byte[] profile_pic;
     private String email;
     @JsonProperty( value = "password", access = JsonProperty.Access.WRITE_ONLY)
     private String password;
