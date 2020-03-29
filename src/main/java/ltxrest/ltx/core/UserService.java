@@ -3,7 +3,7 @@ package ltxrest.ltx.core;
 import ltxrest.ltx.model.MyUser;
 import ltxrest.ltx.repo.RoleRepo;
 import ltxrest.ltx.repo.UserRepo;
-import ltxrest.ltx.service.PasswordEncoder;
+import ltxrest.ltx.configration.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

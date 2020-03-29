@@ -1,7 +1,6 @@
 package ltxrest.ltx.configration;
 
 import ltxrest.ltx.core.UserDetailsServiceImpl;
-import ltxrest.ltx.service.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +12,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
-    private PasswordEncoder encode;
+    private PasswordConfiguration encode;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
