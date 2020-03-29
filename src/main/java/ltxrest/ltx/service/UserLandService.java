@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserControllerService {
+public class UserLandService {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     public RegDto loadUserProfile(String currentUser){

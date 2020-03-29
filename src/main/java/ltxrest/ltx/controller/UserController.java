@@ -1,7 +1,7 @@
 package ltxrest.ltx.controller;
 
 import ltxrest.ltx.dto.RegDto;
-import ltxrest.ltx.service.UserControllerService;
+import ltxrest.ltx.service.UserLandService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,10 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserControllerService userControllerService;
+    private UserLandService userLandService;
     @GetMapping(path="/profile")
     public RegDto fetchProfile(Authentication auth){
-        return userControllerService.loadUserProfile(auth.getName());
+        return userLandService.loadUserProfile(auth.getName());
     }
     @PutMapping(path = "/uploadProfile")
     public String uploadProfilePic(@RequestParam("file")MultipartFile file){
