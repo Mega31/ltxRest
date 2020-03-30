@@ -1,9 +1,9 @@
 package ltxrest.ltx.core;
 
+import ltxrest.ltx.configration.PasswordConfiguration;
 import ltxrest.ltx.model.MyUser;
 import ltxrest.ltx.repo.RoleRepo;
 import ltxrest.ltx.repo.UserRepo;
-import ltxrest.ltx.configration.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ public class UserService{
     @Autowired
     private UserRepo userRepo;
     @Autowired
-    private PasswordEncoder encode;
+    private PasswordConfiguration encode;
     @Autowired
     private RoleRepo roleRepo;
 

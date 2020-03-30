@@ -20,7 +20,7 @@ public interface UserDtoMapper {
     @Mapping(target = "email",source = "username")
     @Mapping(target = "confirmPassword",ignore = true)
     @Mapping(target = "roleIds" ,source = "role")
-    RegDto toRegDto(MyUser myUser);
+    RegDto toMyuser(MyUser myUser);
     RoleDto toDomain(Role role);
 
 }
